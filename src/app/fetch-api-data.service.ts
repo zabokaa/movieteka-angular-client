@@ -89,9 +89,10 @@ getOneGenre(genreName: string): Observable<any> {
 getOneUser(): Observable<any> {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   return user;
+}
 
 // API get favMovies
-getFavoriteMovies(): Observable<any> {
+getFavMovies(): Observable<any> {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const token = localStorage.getItem('token');
   return this.http.get(apiUrl + 'users/' + user.Username, {
@@ -101,15 +102,15 @@ getFavoriteMovies(): Observable<any> {
       })
   }).pipe(
     map(this.extractResponseData),
-    map((data) => data.FavoriteMovies),
+    map((data) => data.FavMovies),
     catchError(this.handleError)
   );
 }
 // API add movie to favs
-addFavoriteMovie(movieId: string): Observable<any> {
+addFavMovie(movieId: string): Observable<any> {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const token = localStorage.getItem('token');
-  user.FavoriteMovies.push(movieId);
+  user.FavMovies.push(movieId);
   localStorage.setItem('user', JSON.stringify(user));
   return this.http.post(apiUrl + 'users/' + user.Username + '/movies/' + movieId, {}, {
     headers: new HttpHeaders(
@@ -123,7 +124,7 @@ addFavoriteMovie(movieId: string): Observable<any> {
   );
 }
 
-isFavoriteMovie(movieId: string): boolean {
+isFavMovie(movieId: string): boolean {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   return user.FavoriteMovies.indexOf(movieId) >= 0;
 }
@@ -159,11 +160,11 @@ deleteUser(): Observable<any> {
 
 
 // API del movie from favs array
-deleteFavoriteMovie(movieId: string): Observable<any> {
+deleteFavMovie(movieId: string): Observable<any> {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const token = localStorage.getItem('token');
 
-  const index = user.FavoriteMovies.indexOf(movieId);
+  const index = user.FavMovies.indexOf(movieId);
   console.log(index);
   if (index > -1) { // only splice array when item is found
     user.FavoriteMovies.splice(index, 1); // 2nd parameter means remove one item only
@@ -194,7 +195,8 @@ private handleError(error: HttpErrorResponse): any {
       `Error Status code ${error.status}, ` +
       `Error body is: ${error.error}`);
   }
-  return throwError(
-  'Something bad happened; please try again later.');
+  return throwError(() => new Error     // fixed bug !
+  ('Something bad happened; please try again later.')
+  );
 }
 }
