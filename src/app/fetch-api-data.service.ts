@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
-const apiUrl = 'YOUR_HOSTED_API_URL_HERE/';   //have to check again !!
+const apiUrl = 'https://movieteka-1312.netlify.app/';   
 @Injectable({
   providedIn: 'root'
 })
