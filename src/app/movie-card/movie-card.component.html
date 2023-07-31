@@ -11,6 +11,7 @@
             <button
                 mat-button
                 color="primary"
+                (click)="openGenre(movie.genre.name, movie.genre.description)"
             >
                 Genre
             </button>
@@ -24,7 +25,7 @@
                 mat-button
                 color="primary"
             >
-                Synopsis
+                Description
             </button>
             <mat-icon>favorite_border</mat-icon>
         </mat-card-actions>
