@@ -10,8 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./fav-movies.component.scss']
 })
 export class FavMoviesComponent {
-  favMovies: any[] = [];
-  user: any = {};
+  favMovies: any[] = [],
+  user: any = {},
 
   constructor(
     public fetchApiData: fetchAPIdataService,
@@ -50,7 +50,7 @@ addFavMovie(movieId: string): void {
 // Removes movie from fav movies list using fetchApiData.deleteFavMovie
 
 deleteFavMovie(movieId: string): void {
-  console.log(id);
+  console.log(movieId);
   this.fetchApiData.deleteFavMovie(movieId).subscribe((result) => {
     this.snackBar.open('Movie removed from favorites', 'OK', {
       duration: 2000,
