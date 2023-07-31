@@ -18,7 +18,7 @@ export class UserRegistrationComponent implements OnInit{
      ) {}
 
      ngOnInit(): void {
-       // what is this exactly ??
+       // ngOnInit method is called once the component has received all its inputs from user
      }
 
 // FUNC for sending form inputs to my backend:

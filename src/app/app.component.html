@@ -9,12 +9,18 @@
 
 <body>
   <div class="container">
-    <h2>Welcome back to your personal Movieteka</h2>
-    <form [formGroup]="valueForm" (ngSubmit)="onSubmit()">     
-      <input type="text" id="value" name="value" formControlName="input">
-      <input type="text" id="username" name="username" formControlName="username">
-
-    </form>
+    <h2>Welcome to your personal Movieteka</h2>
+      <button 
+        mat-raised-button
+        (click)="openUserRegistrationDialog()"
+        style="margin-right: 10px;"
+        color="primary"
+      >
+        sign up !
+      </button>
+      <button mat-raised-button color="primary">
+        login
+      </button>
   </div>
   <router-outlet></router-outlet>
 </body>
