@@ -12,4 +12,8 @@ export class AppComponent {
     username: new FormControl()
   });
   title = 'movieteka-angular-client';
+  
+  onSubmit() {
+    console.log(this.valueForm.value);
+    }
 }
