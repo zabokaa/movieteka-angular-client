@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { UserLoginComponent } from './user-login/user-login.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -14,7 +15,12 @@ export class AppComponent {
   constructor (public dialog: MatDialog) {}
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationComponent, {
-      width: '460px'
+      width: '320px'
+    });
+  };
+  openUserLoginDialog(): void {
+    this.dialog.open(UserLoginComponent, {
+      width: '320px'
     });
   }
 

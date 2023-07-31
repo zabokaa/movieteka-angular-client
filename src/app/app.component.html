@@ -18,8 +18,11 @@
       >
         sign up !
       </button>
-      <button mat-raised-button color="primary">
-        login
+      <button 
+        mat-raised-button 
+        (click)="openUserLoginDialog()"
+        color="primary">
+        login !
       </button>
   </div>
   <router-outlet></router-outlet>
