@@ -167,7 +167,7 @@ deleteFavMovie(movieId: string): Observable<any> {
   const index = user.FavMovies.indexOf(movieId);
   console.log(index);
   if (index > -1) { // only splice array when item is found
-    user.FavoriteMovies.splice(index, 1); // 2nd parameter means remove one item only
+    user.FavMovies.splice(index, 1); // 2nd parameter means remove one item only
   }
   localStorage.setItem('user', JSON.stringify(user));
   return this.http.delete(apiUrl + 'users/' + user.username + '/movies/' + movieId, {
