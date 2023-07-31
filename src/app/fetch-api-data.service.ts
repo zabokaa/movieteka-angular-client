@@ -59,9 +59,9 @@ getOneMovie(title: string): Observable<any> {
 }
 
 // API get director
-getOneDirector(directorName: string): Observable<any> {
+getOneDirector(director.name: string): Observable<any> {
   const token = localStorage.getItem('token');
-  return this.http.get(apiUrl + 'movies/director/' + directorName, {
+  return this.http.get(apiUrl + 'movies/director/' + director.name, {
     headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
@@ -72,9 +72,9 @@ getOneDirector(directorName: string): Observable<any> {
   );
 }
 // API for get genre
-getOneGenre(genreName: string): Observable<any> {
+getOneGenre(genre.name: string): Observable<any> {
   const token = localStorage.getItem('token');
-  return this.http.get(apiUrl + 'movies/genre/' + genreName, {
+  return this.http.get(apiUrl + 'movies/genre/' + genre.name, {
     headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
