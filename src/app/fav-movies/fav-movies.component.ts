@@ -32,17 +32,14 @@ export class FavMoviesComponent {
     console.log(this.favMovies)
   }
 }
-isFavorite(id: string): boolean {
-  return this.user.FavoriteMovies.includes(id);
+isFavMovie(movieId: string): boolean {
+  return this.user.FavoriteMovies.includes(movieId);
 }
 
-/**
- * Adds movie to user's favorite movies list using the API call fetchApiData.addFavMovie()
- * @function addToFavorites
- * @param id of movie, type: string
-*/
-addFav(id: string): void {
-  this.fetchApiData.addFavMovie(id).subscribe((result) => {
+//adding movie to fav moviese array addFavMovie()
+
+addFavMovie(movieId: string): void {
+  this.fetchApiData.addFavMovie(movieId).subscribe((result) => {
     this.snackBar.open('Movie added to favorites', 'OK', {
       duration: 2000,
     });
@@ -50,14 +47,11 @@ addFav(id: string): void {
   });
 }
 
-/**
-  * Removes movie from user's favorite movies list using the API call fetchApiData.deleteFavMovie()
-  * @function removeFromFavorites
-  * @param id of movie, type: string
-*/
-removeFav(id: string): void {
+// Removes movie from fav movies list using fetchApiData.deleteFavMovie
+
+deleteFavMovie(movieId: string): void {
   console.log(id);
-  this.fetchApiData.deleteFavMovie(id).subscribe((result) => {
+  this.fetchApiData.deleteFavMovie(movieId).subscribe((result) => {
     this.snackBar.open('Movie removed from favorites', 'OK', {
       duration: 2000,
     });

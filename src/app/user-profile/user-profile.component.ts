@@ -3,7 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { fetchAPIdataService} from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
@@ -23,21 +23,22 @@ export class UserProfileComponent implements OnInit{
     bday: '',
   };
 }
-
-constructor(
-  public fetchApiData: fetchAPIdataService,
-  // public dialogRef: MatDialogRef<UserProfileComponent>,
-  public snackBar: MatSnackBar,
-  private router: Router
-) {}
-
 ngOnInit(): void {
   this.getUserInfo();
 }
 
+
+constructor(
+  public fetchApiData: fetchAPIdataService,
+  public dialogRef: MatDialogRef<UserProfileComponent>,
+  public snackBar: MatSnackBar,
+  private router: Router
+) {}
+
+
 // Fetch user data via API
-getUserInfo(): void {
-  this.fetchApiData.getUser().subscribe((resp: any) => {
+getOneUser(): void {
+  this.fetchApiData.getOneUser().subscribe((resp: any) => {
     this.user = resp;
     this.updatedUser.username = this.user.username;
     this.updatedUser.email = this.user.email;
@@ -49,7 +50,7 @@ getUserInfo(): void {
 }
 
 // Update user data, such as username, password, email, or birthday
-updateUserInfo(): void {
+editUser(): void {
   this.fetchApiData.editUser(this.updatedUser).subscribe((result) => {
     console.log(result);
     if (this.user.username !== result.username || this.user.password !== result.password) {
@@ -76,7 +77,7 @@ updateUserInfo(): void {
 }
 
 // Delete user data for the user that is logged in
-deleteAccount(): void {
+deleteUser(): void {
   if (confirm('your account will be completely deleted + all your data will be lost')) {
     this.router.navigate(['welcome']).then(() => {
       this.snackBar.open(
