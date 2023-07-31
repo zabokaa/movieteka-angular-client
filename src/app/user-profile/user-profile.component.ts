@@ -3,8 +3,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { fetchAPIdataService} from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { MatIcon } from '@angular/material/icon';
-
 
 @Component({
   selector: 'app-user-profile',
@@ -15,6 +13,16 @@ export class UserProfileComponent implements OnInit{
   user: any = {};
   initialInput: any = {};
   favorites: any = [];
+
+  constructor(
+    public fetchApiData: fetchAPIdataService,
+    public dialogRef: MatDialogRef<UserProfileComponent>,
+    public snackBar: MatSnackBar,
+    private router: Router
+  ) {}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
   // update user data
   @Input() updatedUser = {
     username: '',
@@ -24,17 +32,8 @@ export class UserProfileComponent implements OnInit{
   };
 }
 ngOnInit(): void {
-  this.getUserInfo();
+  this.getOneUser();
 }
-
-
-constructor(
-  public fetchApiData: fetchAPIdataService,
-  public dialogRef: MatDialogRef<UserProfileComponent>,
-  public snackBar: MatSnackBar,
-  private router: Router
-) {}
-
 
 // Fetch user data via API
 getOneUser(): void {
@@ -53,7 +52,7 @@ getOneUser(): void {
 editUser(): void {
   this.fetchApiData.editUser(this.updatedUser).subscribe((result) => {
     console.log(result);
-    if (this.user.username !== result.username || this.user.password !== result.password) {
+    if (this.user && (this.user.username !== result.username || this.user.password !== result.password)) {
       localStorage.clear();
       this.router.navigate(['welcome']);
       this.snackBar.open(
@@ -93,5 +92,21 @@ deleteUser(): void {
       localStorage.clear();
     });
   }
+}
+
+function ngOnInit() {
+  throw new Error('Function not implemented.');
+}
+
+function getOneUser() {
+  throw new Error('Function not implemented.');
+}
+
+function editUser() {
+  throw new Error('Function not implemented.');
+}
+
+function deleteUser() {
+  throw new Error('Function not implemented.');
 }
 
