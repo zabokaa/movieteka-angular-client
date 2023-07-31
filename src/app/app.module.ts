@@ -14,12 +14,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
 
 @NgModule({             
   declarations: [
     AppComponent,
     UserRegistrationComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    MovieCardComponent
   ],
   imports: [                //manually adding 
     BrowserModule,

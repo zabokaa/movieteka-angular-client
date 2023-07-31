@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -23,6 +23,9 @@ export class AppComponent {
       width: '320px'
     });
   }
-
-  
+  openMoviesDialog(): void {
+    this.dialog.open(MovieCardComponent, {
+      width: '500px'
+    });
+  }
 }
