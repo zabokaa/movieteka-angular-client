@@ -8,7 +8,7 @@ import { GenreComponent } from '../genre/genre.component';
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
-export class MovieCardComponent {
+export class MovieCardComponent implements OnInit {
   movies: any[] = [];                     // movies array here
   
   constructor(
@@ -16,6 +16,7 @@ export class MovieCardComponent {
     public dialog: MatDialog,
     ) { }
 
+  ngOnInit(): void { this.getMovies()}    // call the getMovies func with '()'
 // show all movies
 getMovies(): void {
   this.fetchApiData.getAllMovies().subscribe((resp: any) => {

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.scss']
 })
+
 export class UserLoginComponent implements OnInit {
   @Input() userData = {username:'', password:''}
 
@@ -16,27 +17,27 @@ export class UserLoginComponent implements OnInit {
     public fetchApiData: fetchAPIdataService,
     public dialogRef: MatDialogRef<UserLoginComponent>,  
     public snackBar: MatSnackBar,
-    public router: Router,
+    private router: Router,    // private, da nur nach login
      ) {}
 
      ngOnInit(): void {
      }
 
 loginUser(): void {
-  this.fetchApiData.userLogin(this.userData).subscribe({
-    next: (result) => {
+  this.fetchApiData.userLogin(this.userData).subscribe(
+    (result) => {
       console.log(result);
       // send to local storage
-      localStorage.setItem('user', result.user.username);
+      localStorage.setItem('user', JSON.stringify(result.user));
       localStorage.setItem('token', result.token);
       this.dialogRef.close(); // Close the modal on success
       this.snackBar.open(`welcome back ${this.userData.username}`, 'OK', { duration: 2000 });
-      this.router.navigate(['movies']);  //for routing 
+      this.router.navigate(['movies']);  //for routing .. but now not showing , ahhhh result has to be put into open dialog
     },
-    error: (error) => {
-      console.log(error);
-      this.snackBar.open(error, 'OK', { duration: 2000 })
+    (error) => {
+      this.snackBar.open(error, 'OK', { duration: 2000 });
     }
-  }) 
+  )
 }
 }
+
