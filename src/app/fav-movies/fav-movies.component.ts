@@ -9,18 +9,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './fav-movies.component.html',
   styleUrls: ['./fav-movies.component.scss']
 })
-export class FavMoviesComponent {
-  favMovies: any[] = [],
-  user: any = {},
+export class FavMoviesComponent implements OnInit {
+  favMovies: any[] = [];
+  user: any = {};
 
   constructor(
     public fetchApiData: fetchAPIdataService,
     public dialog: MatDialog,
-    public snackbar: MatSnackBar,
+    public snackBar: MatSnackBar,
   ) {}
 
   getFavMovies(): void {
-    this.fetchApiData.getUser().subscribe((user: any) => {
+    this.fetchApiData.getOneUser().subscribe((user: any) => {
       this.user = user;
       this.fetchApiData.getAllMovies().subscribe((movies: any) => {
         this.favMovies = movies.filter((m: any) => user.FavMovies.includes(m._id))
@@ -29,33 +29,33 @@ export class FavMoviesComponent {
   }
   ngOnInit(): void {
     this.getFavMovies();
-    console.log(this.favMovies)
+    // console.log(this.favMovies)
   }
-}
-isFavMovie(movieId: string): boolean {
-  return this.user.FavoriteMovies.includes(movieId);
-}
 
+// first check if movie is in fav list 
+isFavorite(id: string): boolean {
+  return this.user.FavMovies.includes(_id);
+}
 //adding movie to fav moviese array addFavMovie()
 
-addFavMovie(movieId: string): void {
-  this.fetchApiData.addFavMovie(movieId).subscribe((result) => {
+addFavMovie(): void {  //why can not find name 'addFavMovie' ??
+  this.fetchApiData.addFavMovie(_id).subscribe((result: any) => {  //specified type of result
     this.snackBar.open('Movie added to favorites', 'OK', {
       duration: 2000,
     });
-    this.ngOnInit();
+    this.getFavMovies();      //calling to update list ?
   });
 }
 
 // Removes movie from fav movies list using fetchApiData.deleteFavMovie
 
-deleteFavMovie(movieId: string): void {
-  console.log(movieId);
-  this.fetchApiData.deleteFavMovie(movieId).subscribe((result) => {
+deleteFavMovie(): void {
+  this.fetchApiData.deleteFavMovie(_id).subscribe((result: any) => {     //can not find 'movieId' but neihter 'movies._id/
     this.snackBar.open('Movie removed from favorites', 'OK', {
       duration: 2000,
     });
-    this.ngOnInit();
-  });
+    this.getFavMovies();
+  }),
 }
+}  //ah, both func have been outside the FavMoviesComponent
 

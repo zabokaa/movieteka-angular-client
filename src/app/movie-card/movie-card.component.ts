@@ -10,6 +10,7 @@ import { GenreComponent } from '../genre/genre.component';
 })
 export class MovieCardComponent implements OnInit{
   movies: any[] = [];                     // movies array here
+  
   constructor(
     public fetchApiData: fetchAPIdataService,
     public dialog: MatDialog
@@ -29,7 +30,7 @@ getMovies(): void {
   }
 }
 // open info genre
-openGenre(movies.genre.name: string, movies.genre.description: string): void {
+openGenre(data.name, data.description): void {
   this.dialog.open(GenreComponent, {
     data: {
       name: movies.genre.name,
