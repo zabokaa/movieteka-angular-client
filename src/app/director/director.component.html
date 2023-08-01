@@ -13,15 +13,16 @@
       close
     </button>
     </mat-card-header>
-    <mat-dialog-content class="director-dialog-content">
+    <!-- this is not showing, but in console  -->
+    <mat-dialog-content class="director-dialog-content">     
       <p>
+        <b>Bio: </b>{{ data.bio }}
+        <br />
+        <br />
         <b>Born: </b>{{ data.birthyear }}
         <br />
         <br />
         <b>Gender: </b>{{ data.gender }}
-        <br />
-        <br />
-        <b>Bio: </b>{{ data.bio }}
       </p>
 
     </mat-dialog-content>
