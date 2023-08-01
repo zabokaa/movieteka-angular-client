@@ -17,6 +17,7 @@ export class MovieCardComponent implements OnInit {
     ) { }
 
   ngOnInit(): void { this.getMovies()}    // call the getMovies func with '()'
+  
 // show all movies
 getMovies(): void {
   this.fetchApiData.getAllMovies().subscribe((resp: any) => {
@@ -35,4 +36,17 @@ getMovies(): void {
     width: '400px',
   });
 }
+
+openDirector(name: string, birthyear: Date, gender: string, bio: string): void {
+  this.dialog.open(GenreComponent, {
+    data: {
+      name: name,
+      birthyear: birthyear,
+      gender: gender,
+      bio: bio,
+    },
+    width: '400px',
+  });
+}
+
 }

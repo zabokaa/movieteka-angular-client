@@ -12,7 +12,7 @@ export class DirectorComponent implements OnInit {
     public data: {
       name: string;
       bio: string;
-      birthyear: string;
+      birthyear: Date;
       gender: string;
     }
   ) {}
