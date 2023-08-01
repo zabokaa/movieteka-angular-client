@@ -20,18 +20,16 @@ export class UserProfileComponent implements OnInit{
     public snackBar: MatSnackBar,
     private router: Router
   ) {}
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+ 
   // update user data
-  @Input() updatedUser = {
+  updatedUser = {
     username: '',
     password: '',
     email: '',
     bday: '',
   };
-}
-ngOnInit(): void {
+
+ngOnInit(): void {    //problem: ngOnit was outside of the class def
   this.getOneUser();
 }
 
@@ -41,7 +39,6 @@ getOneUser(): void {
     this.user = resp;
     this.updatedUser.username = this.user.username;
     this.updatedUser.email = this.user.email;
-    // this.user.Birthday comes in as ISOString format, like so: "2011-10-05T14:48:00.000Z"
     this.updatedUser.bday = this.user.bday;
     this.favorites = this.user.FavMovies;
     return this.user;
@@ -94,19 +91,18 @@ deleteUser(): void {
   }
 }
 
-function ngOnInit() {
-  throw new Error('Function not implemented.');
-}
+// function ngOnInit() {
+//   throw new Error('Function not implemented.');
+// }
 
-function getOneUser() {
-  throw new Error('Function not implemented.');
-}
+// function getOneUser() {
+//   throw new Error('Function not implemented.');
+// }
 
-function editUser() {
-  throw new Error('Function not implemented.');
-}
+// function editUser() {
+//   throw new Error('Function not implemented.');
+// }
 
-function deleteUser() {
-  throw new Error('Function not implemented.');
-}
-
+// function deleteUser() {
+//   throw new Error('Function not implemented.');
+// }

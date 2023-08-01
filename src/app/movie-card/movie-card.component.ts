@@ -30,13 +30,13 @@ getMovies(): void {
   }
 }
 // open info genre
-openGenre(data.name, data.description): void {
+ openGenre(movies: any): void {
   this.dialog.open(GenreComponent, {
     data: {
       name: movies.genre.name,
       description: movies.genre.description,
     },
     width: '400px',
-  });
+  }),
 }
 
