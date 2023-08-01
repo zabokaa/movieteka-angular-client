@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class UserLoginComponent implements OnInit {
   @Input() userData = {username:'', password:''}
+
   constructor(
     public fetchApiData: fetchAPIdataService,
     public dialogRef: MatDialogRef<UserLoginComponent>,  
@@ -20,6 +21,7 @@ export class UserLoginComponent implements OnInit {
 
      ngOnInit(): void {
      }
+
 loginUser(): void {
   this.fetchApiData.userLogin(this.userData).subscribe({
     next: (result) => {
@@ -29,7 +31,7 @@ loginUser(): void {
       localStorage.setItem('token', result.token);
       this.dialogRef.close(); // Close the modal on success
       this.snackBar.open(`welcome back ${this.userData.username}`, 'OK', { duration: 2000 });
-      this.router.navigate(['movies']);
+      this.router.navigate(['movies']);  //for routing 
     },
     error: (error) => {
       console.log(error);

@@ -8,17 +8,13 @@ import { GenreComponent } from '../genre/genre.component';
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
-export class MovieCardComponent implements OnInit{
+export class MovieCardComponent {
   movies: any[] = [];                     // movies array here
   
   constructor(
     public fetchApiData: fetchAPIdataService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
     ) { }
-
-ngOnInit(): void {
-  this.getMovies();
-}
 
 // show all movies
 getMovies(): void {
@@ -27,16 +23,15 @@ getMovies(): void {
       console.log(this.movies);
       return this.movies;
     });
-  }
 }
 // open info genre
- openGenre(movies: any): void {
+ openGenre(name: string, description: string): void {
   this.dialog.open(GenreComponent, {
     data: {
-      name: movies.genre.name,
-      description: movies.genre.description,
+      name: name,
+      description: description,
     },
     width: '400px',
-  }),
+  });
 }
-
+}
