@@ -1,1 +1,22 @@
-<p>fav-movies works!</p>
+<h2>My Fav Movies</h2>
+<div class="fav-movies">
+    <mat-card *ngFor="let movie of favMovies;" class="movie-card">
+        <mat-card-header>
+        <mat-card-title>{{movie.title}}</mat-card-title>
+            <mat-card-subtitle>directed by: {{movie.director.name}}</mat-card-subtitle>
+        </mat-card-header>
+        <img src="{{ movie.imagePath }}" alt="{{movie.title}}"/>
+      
+        <mat-card-actions>
+            <mat-icon class="fav-icon"
+            style="cursor: pointer"
+            (click)="
+            isFav(movie._id)
+              ? deleteFavMovie(movie._id)
+              : addFavMovie(movie._id)
+            "
+          >
+          {{ isFavMovie(movie._id) ? "favorite" : "favorite_border" }}</mat-icon>
+        </mat-card-actions>
+    </mat-card>
+</div>
