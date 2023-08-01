@@ -33,13 +33,13 @@ export class FavMoviesComponent implements OnInit {
   }
 
 // first check if movie is in fav list 
-isFavorite(id: string): boolean {
-  return this.user.FavMovies.includes(_id);
+isFavMovie(id: string): boolean {
+  return this.user.FavMovies.includes(id);
 }
 //adding movie to fav moviese array addFavMovie()
 
-addFavMovie(): void {  //why can not find name 'addFavMovie' ??
-  this.fetchApiData.addFavMovie(_id).subscribe((result: any) => {  //specified type of result
+addFavMovie(id: string): void {  //why can not find name 'addFavMovie' ??
+  this.fetchApiData.addFavMovie(id).subscribe((result: any) => {  //specified type of result
     this.snackBar.open('Movie added to favorites', 'OK', {
       duration: 2000,
     });
@@ -49,13 +49,12 @@ addFavMovie(): void {  //why can not find name 'addFavMovie' ??
 
 // Removes movie from fav movies list using fetchApiData.deleteFavMovie
 
-deleteFavMovie(): void {
-  this.fetchApiData.deleteFavMovie(_id).subscribe((result: any) => {     //can not find 'movieId' but neihter 'movies._id/
+deleteFavMovie(id: string): void {
+  this.fetchApiData.deleteFavMovie(id).subscribe((result: any) => {     //can not find 'movieId' but neihter 'movies._id/
     this.snackBar.open('Movie removed from favorites', 'OK', {
       duration: 2000,
     });
     this.getFavMovies();
-  }),
+  });
 }
-}  //ah, both func have been outside the FavMoviesComponent
-
+}

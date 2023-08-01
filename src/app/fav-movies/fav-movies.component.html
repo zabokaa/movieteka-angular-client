@@ -12,8 +12,8 @@
             style="cursor: pointer"
             (click)="
             isFavMovie(movie._id)
-              ? deleteFavMovie()
-              : addFavMovie()
+              ? deleteFavMovie(movie._id)
+              : addFavMovie(movie._id)
             "
           >
           {{ isFavMovie(movie._id) ? "favorite" : "favorite_border" }}</mat-icon>
