@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];                     // movies array here
-  
+
   constructor(
     public fetchApiData: fetchAPIdataService,
     public dialog: MatDialog,
@@ -67,6 +67,9 @@ openDescription(title: string, description: string): void {
 }
 
 // how to add the favMovies since it should not be displayed in a dialog window
+// duplicating from favMovies componant . . but should be cleaner way
 
-// show user profile (from menubar)
+
+
+
 
