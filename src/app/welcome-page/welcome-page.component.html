@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
+    <!-- <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Movieteka</title>
-    </head>
-
-    <body>
+    </head> -->
+<!-- 
+    <body> -->
         
         <div class="container">
-            <h2>Welcome to your personal Movieteka</h2>
+            <div class="content-box">
+                <h2>Welcome to your personal Movieteka</h2>
             <button 
+                class="welcome-btn"
                 mat-raised-button
                 (click)="openUserRegistrationDialog()"
                 style="margin-right: 10px;"
@@ -20,12 +22,15 @@
                 sign up !
             </button>
             <button 
+                class="welcome-btn"
                 mat-raised-button 
                 (click)="openUserLoginDialog()"
                 style="margin-right: 10px;"
                 color="primary">
                 login !
             </button>
+            </div>
+            
         </div>
-    </body>
+    <!-- </body> -->
 </html>
