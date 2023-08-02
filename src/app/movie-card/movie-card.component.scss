@@ -1,0 +1,27 @@
+
+.movie-img {
+    /* Set a fixed width and height, or use percentage-based values for responsiveness */
+    width: 400px; 
+    height: 600px;
+  
+    /* Optional: Add some padding and a box-shadow for better visual appearance */
+    padding: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+
+  @media (max-width: 768px) {
+    .movie-image {
+      width: 150px; 
+      height: 225px;
+    }
+  }
+  
+  
+  @media (max-width: 480px) {
+    .movie-image {
+      width: 100px; 
+      height: 150px; 
+    }
+  }
+  
