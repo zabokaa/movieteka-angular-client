@@ -37,14 +37,10 @@
             >
                 Description
             </button>
-    <!-- ah, I have to include click and *ngIf for 2 funcs: delete and add to favs -->
-            <button 
-           
-                
-            >
-                <mat-icon>favorite_border</mat-icon>
-            </button>
-           
+             <!-- Add or remove favorite button with conditionally changing heart color -->
+      <button mat-icon-button (click)="toggleFavorite(movie)">
+        <mat-icon [style.color]="isFavorite(movie) ? 'purple' : 'grey'">favorite</mat-icon>
+      </button>
         </mat-card-actions>
     </mat-card>
 </div>
