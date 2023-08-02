@@ -19,6 +19,11 @@ export class FavMoviesComponent implements OnInit {
     public snackBar: MatSnackBar,
   ) {}
 
+  ngOnInit(): void {
+    this.getFavMovies();
+    console.log(this.favMovies)
+  }
+
   getFavMovies(): void {
     this.fetchApiData.getOneUser().subscribe((user: any) => {
       this.user = user;
@@ -27,10 +32,7 @@ export class FavMoviesComponent implements OnInit {
       });
     });
   }
-  ngOnInit(): void {
-    this.getFavMovies();
-    // console.log(this.favMovies)
-  }
+
 
 // first check if movie is in fav list 
 isFavMovie(id: string): boolean {
