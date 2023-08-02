@@ -50,7 +50,7 @@ editUserData(): void {
     console.log(result);
     if (this.user && (this.user.username !== result.username || this.user.password !== result.password)) {
       localStorage.clear();
-      this.router.navigate(['welcome']);
+      this.router.navigate(['profile']);   //habe das hier von welcome to profile geaendert
       this.snackBar.open(
         'Credentials updated! Please login using your new credentials.',
         'OK',

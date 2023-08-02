@@ -1,5 +1,12 @@
 
 <!DOCTYPE html>
+<!-- menu for routing to user profile -->
+<mat-toolbar color="primary" class="flex justify-content-between">    
+        your movieteka
+          <!-- <a href="/profile" mat-stroked-button> profile </a> -->
+          <a routerLink="['profile']" mat-stroked-button>profilo</a>
+</mat-toolbar>
+
 <!-- ngFor is used to display all returned movies -->
 <div style="display: flex;">
     <mat-card *ngFor="let movie of movies" style="flex: 1 1 auto">

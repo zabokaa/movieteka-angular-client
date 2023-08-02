@@ -4,6 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { GenreComponent } from '../genre/genre.component';
 import { DirectorComponent } from '../director/director.component';
 import { DescriptionComponent } from '../description/description.component';
+// want to open profile via toolbar
+import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
@@ -16,6 +19,7 @@ export class MovieCardComponent implements OnInit {
   constructor(
     public fetchApiData: fetchAPIdataService,
     public dialog: MatDialog,
+    public router: Router,
     ) { }
 
   ngOnInit(): void { this.getMovies()}    // call the getMovies func with '()'
@@ -63,3 +67,6 @@ openDescription(title: string, description: string): void {
 }
 
 // how to add the favMovies since it should not be displayed in a dialog window
+
+// show user profile (from menubar)
+

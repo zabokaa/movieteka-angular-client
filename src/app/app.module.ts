@@ -22,11 +22,12 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DirectorComponent } from './director/director.component';
 import { FavMoviesComponent } from './fav-movies/fav-movies.component';
 import { DescriptionComponent } from './description/description.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
-  { path: 'profile', component: UserProfileComponent},
+  { path: 'profile', component: UserProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
@@ -58,7 +59,7 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     RouterModule.forRoot(appRoutes),
     MatIconModule,
-
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

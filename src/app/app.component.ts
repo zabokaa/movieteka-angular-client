@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { MovieCardComponent } from './movie-card/movie-card.component';
+// import { MovieCardComponent } from './movie-card/movie-card.component';
 
 
 @Component({
