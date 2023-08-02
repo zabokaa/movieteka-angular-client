@@ -1,6 +1,8 @@
 # MovietekaAngularClient
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
+- login for testing without signing up:
+- please use: username "han" & password "nunu" 
 
 ## Development server
 
