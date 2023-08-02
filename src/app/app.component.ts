@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { UserRegistrationComponent } from './user-registration/user-registration.component';
-import { UserLoginComponent } from './user-login/user-login.component';
-import { MatDialog } from '@angular/material/dialog';
+
+import { MovieCardComponent } from './movie-card/movie-card.component';
+
 
 @Component({
   selector: 'app-root',
@@ -11,18 +10,10 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AppComponent {
   title = 'movieteka-angular-client';
-  // just for openiing the dialog itself
-  constructor (public dialog: MatDialog) {}
-  openUserRegistrationDialog(): void {
-    this.dialog.open(UserRegistrationComponent, {
-      width: '320px'
-    });
-  };
-  openUserLoginDialog(): void {
-    this.dialog.open(UserLoginComponent, {
-      width: '320px'
-    });
-  }
-
   
+  // openMoviesDialog(): void {
+  //   this.dialog.open(MovieCardComponent, {
+  //     width: '700px'
+  //   });
+  // }
 }

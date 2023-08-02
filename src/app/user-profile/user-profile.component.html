@@ -1,0 +1,63 @@
+<div class="profile-page">
+    <mat-card class="profile-card">
+      <mat-card-header class="profile-card-header">
+        <mat-card-title style="margin: 0 0 1.15em;"><h2>Hello, <b>{{ user.username }}</b></h2></mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="user-profile-card-content">
+        <form class="user-info">
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input
+              matInput
+              [(ngModel)]="updatedUser.username"
+              value="{{ updatedUser.username }}"
+              type="text"
+              name="username"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Update Password</mat-label>
+            <input
+              matInput
+              [(ngModel)]="updatedUser.password"
+              placeholder=""
+              type="password"
+              name="password"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              [(ngModel)]="updatedUser.email"
+              type="email"
+              value="{{ updatedUser.email }}"
+              name="Email"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Birthday</mat-label>
+            <input
+              matInput
+              [(ngModel)]="updatedUser.bday"
+              type="date"
+              value="{{ updatedUser.bday | date }}"
+              name="bday"
+            />
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions class="user-profile-actions">
+        <button mat-raised-button (click)="editUserData()" color="basic">
+          <mat-icon>edit</mat-icon>
+          Update profile
+        </button>
+        <button mat-raised-button (click)="deleteUserData()" color="warn">
+          <mat-icon>delete_forever</mat-icon>
+          Delete account
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
