@@ -61,3 +61,5 @@ openDescription(title: string, description: string): void {
   });
 }
 }
+
+// how to add the favMovies since it should not be displayed in a dialog window
