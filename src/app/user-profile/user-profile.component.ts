@@ -89,4 +89,49 @@ deleteUserData(): void {
     });
   }
 }
+
+// Check if the movie is in the user's favorite list
+isFavorite(movie: any): boolean {
+  return this.fetchApiData.isFavMovie(movie._id);
+}
+
+// Add favorite movie
+addFavorite(movieId: string): void {
+  this.fetchApiData.addFavMovie(movieId).subscribe((Response: any) => {
+    this.snackBar.open('added to favorites', 'OK', {
+      duration: 2000,
+    });
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    user.favMovies.push(movieId);
+    localStorage.setItem('user', JSON.stringify(user));
+  });
+}
+
+// Delete favorite movie
+deleteFavorite(movieId: string): void {
+  this.fetchApiData.deleteFavMovie(movieId).subscribe((result) => {
+    this.snackBar.open('Movie removed from favorites', 'OK', {
+      duration: 2000,
+    });
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const index = user.favMovies.indexOf(movieId);
+    console.log(index);
+    if (index > -1) {
+      // only splice array when item is found
+      user.favMovies.splice(index, 1); // 2nd parameter means remove one item only
+    }
+    localStorage.setItem('user', JSON.stringify(user));
+  });
+}
+
+// Add or remove the movie from the user's favorite list
+toggleFavorite(movie: any): void {
+  if (this.isFavorite(movie)) {
+    this.deleteFavorite(movie._id);
+    // Remove from favorites
+  } else {
+    // Add to favorites
+    this.addFavorite(movie._id);
+  }
+}
 }
