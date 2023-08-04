@@ -23,7 +23,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     public fetchApiData: fetchAPIdataService,
-    public dialogRef: MatDialogRef<UserProfileComponent>,
+    //public dialogRef: MatDialogRef<UserProfileComponent>,
     public snackBar: MatSnackBar,
     private router: Router
   ) {}
@@ -34,14 +34,12 @@ ngOnInit(): void {    //problem: ngOnit was outside of the class def
 
 // Fetch user data via API  .. ahh, oc 2 different funcs can not have the exact same naming
 getUserData(): void {
-  this.fetchApiData.getOneUser().subscribe((resp: any) => {
-    this.user = resp;
-    this.updatedUser.username = this.user.username;
-    this.updatedUser.email = this.user.email;
-    this.updatedUser.bday = this.user.bday;
-    this.favorites = this.user.FavMovies;
+  this.user =  this.fetchApiData.getOneUser();
+  this.updatedUser.username = this.user.username;
+  this.updatedUser.email = this.user.email;
+  this.updatedUser.bday = this.user.bday;
+  this.favorites = this.user.FavMovies;
     return this.user;
-  });
 }
 
 // Update user data, such as username, password, email, or birthday

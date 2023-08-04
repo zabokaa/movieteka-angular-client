@@ -79,7 +79,7 @@ export class fetchAPIdataService {
   }
 
   // API get user
-  getOneUser(): Observable<any> {
+  getOneUser(): any {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     return user;
   }
