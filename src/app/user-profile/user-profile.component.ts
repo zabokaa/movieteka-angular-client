@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 import { fetchAPIdataService} from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -12,7 +11,7 @@ import { Router } from '@angular/router';
 export class UserProfileComponent implements OnInit {
   user: any = {};
   initialInput: any = {};
-  favorites: any = [];   //that is the array of fav movies, still need to be displayed 
+  favorites: any = [];   //that is the array of fav movies, also use in favMovieComp
    // update user data
    @Input() updatedUser = {
     username: '',
@@ -23,23 +22,25 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     public fetchApiData: fetchAPIdataService,
-    //public dialogRef: MatDialogRef<UserProfileComponent>,
     public snackBar: MatSnackBar,
     private router: Router
   ) {}
 
-ngOnInit(): void {    //problem: ngOnit was outside of the class def
+ngOnInit(): void {    
   this.getUserData();
 }
 
-// Fetch user data via API  .. ahh, oc 2 different funcs can not have the exact same naming
+// Fetch user and favMovies via all movies 
 getUserData(): void {                             // no need for subscribe !!
   this.user =  this.fetchApiData.getOneUser();
   this.updatedUser.username = this.user.username;
   this.updatedUser.email = this.user.email;
   this.updatedUser.bday = this.user.bday;
-  this.favorites = this.user.FavMovies;
-    return this.user;
+  
+  this.fetchApiData.getAllMovies().subscribe((response: any) => {
+    this.favorites = response.filter((m: {_id:any}) => this.user.favMovies.indexOf(m._id) >= 0)
+    // console.log(this.favorites)     
+  })
 }
 
 // Update user data, such as username, password, email, or birthday
@@ -51,22 +52,12 @@ editUserData(): void {
       this.router.navigate(['profile']);   //habe das hier von welcome to profile geaendert
       this.snackBar.open(
         'Your user date have been updated',
-        // 'Credentials updated! Please login using your new credentials.',
         'OK',
         {
           duration: 2000,
         }
       );
     }
-    // else {
-    //   this.snackBar.open(
-    //     'user info have been updated!',
-    //     'OK',
-    //     {
-    //       duration: 2000,
-    //     }
-    //   );
-    // }
   });
 }
 
@@ -88,7 +79,7 @@ deleteUserData(): void {
     });
   }
 }
-
+////
 // Check if the movie is in the user's favorite list
 isFavorite(movie: any): boolean {
   return this.fetchApiData.isFavMovie(movie._id);
@@ -103,6 +94,8 @@ addFavorite(movieId: string): void {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     user.favMovies.push(movieId);
     localStorage.setItem('user', JSON.stringify(user));
+         // test if working --> yes
+         console.log('Favorite Movies:', user.favMovies);
   });
 }
 
@@ -116,10 +109,11 @@ deleteFavorite(movieId: string): void {
     const index = user.favMovies.indexOf(movieId);
     console.log(index);
     if (index > -1) {
-      // only splice array when item is found
       user.favMovies.splice(index, 1); // 2nd parameter means remove one item only
     }
     localStorage.setItem('user', JSON.stringify(user));
+    // test if working  --> yes
+    console.log('Favorite Movies:', user.favMovies);
   });
 }
 
@@ -133,4 +127,5 @@ toggleFavorite(movie: any): void {
     this.addFavorite(movie._id);
   }
 }
+
 }

@@ -1,6 +1,6 @@
-<div class="profile-page">
-    <mat-card class="profile-card">
-      <mat-card-header class="profile-card-header">
+<div >
+    <mat-card>
+      <mat-card-header >
         <mat-card-title style="margin: 0 0 1.15em;"><h2>Hello {{ user.username }} !</h2></mat-card-title>
       </mat-card-header>
       <mat-card-content class="user-profile-card-content">
@@ -48,11 +48,10 @@
             />
           </mat-form-field>
         </form>
-        <!-- Display the list of favorite movies -->
- 
+
       </mat-card-content>
-      <mat-card-actions class="user-profile-actions">
-        <button mat-raised-button (click)="editUserData()" color="basic">
+      <mat-card-actions>
+        <button mat-raised-button (click)="editUserData()" color="basic" class="left-btn">
           <mat-icon>edit</mat-icon>
           Update profile
         </button>
@@ -62,4 +61,25 @@
         </button>
       </mat-card-actions>
     </mat-card>
+      <br>
+    <div class="header-favs">
+      <h2>Favorite Movies</h2>
+      <h4>unclick the heart  -- if you want to remove from your fav list</h4>
+  
+        <div style="display: flex;" class="container">
+
+        <mat-card *ngFor="let movie of favorites" style="flex: 1 1 auto">
+            <mat-card-header>
+            <mat-card-title>{{movie.title}}</mat-card-title>
+                <mat-card-subtitle>Directed by: {{movie.director.name}}</mat-card-subtitle>
+            </mat-card-header>
+            <img  class="movie-img" src="{{movie.imagePath}}" alt="{{movie.title}}" />
+            <mat-card-actions>
+              <button mat-icon-button (click)="toggleFavorite(movie)">
+                <mat-icon [style.color]="isFavorite(movie) ? 'purple' : 'grey'">favorite</mat-icon>
+              </button>
+            </mat-card-actions>
+        </mat-card>
+      </div>    
+    </div>
   </div>

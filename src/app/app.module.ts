@@ -20,7 +20,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { GenreComponent } from './genre/genre.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DirectorComponent } from './director/director.component';
-import { FavMoviesComponent } from './fav-movies/fav-movies.component';
 import { DescriptionComponent } from './description/description.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
@@ -41,7 +40,6 @@ const appRoutes: Routes = [
     GenreComponent,
     UserProfileComponent,
     DirectorComponent,
-    FavMoviesComponent,
     DescriptionComponent
   ],
   imports: [                //manually adding 
