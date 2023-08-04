@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class UserProfileComponent implements OnInit {
   user: any = {};
   initialInput: any = {};
-  favorites: any = [];
+  favorites: any = [];   //that is the array of fav movies, still need to be displayed 
    // update user data
    @Input() updatedUser = {
     username: '',
@@ -33,7 +33,7 @@ ngOnInit(): void {    //problem: ngOnit was outside of the class def
 }
 
 // Fetch user data via API  .. ahh, oc 2 different funcs can not have the exact same naming
-getUserData(): void {
+getUserData(): void {                             // no need for subscribe !!
   this.user =  this.fetchApiData.getOneUser();
   this.updatedUser.username = this.user.username;
   this.updatedUser.email = this.user.email;
@@ -50,22 +50,23 @@ editUserData(): void {
       localStorage.clear();
       this.router.navigate(['profile']);   //habe das hier von welcome to profile geaendert
       this.snackBar.open(
-        'Credentials updated! Please login using your new credentials.',
+        'Your user date have been updated',
+        // 'Credentials updated! Please login using your new credentials.',
         'OK',
         {
           duration: 2000,
         }
       );
     }
-    else {
-      this.snackBar.open(
-        'user info have been updated!',
-        'OK',
-        {
-          duration: 2000,
-        }
-      );
-    }
+    // else {
+    //   this.snackBar.open(
+    //     'user info have been updated!',
+    //     'OK',
+    //     {
+    //       duration: 2000,
+    //     }
+    //   );
+    // }
   });
 }
 
