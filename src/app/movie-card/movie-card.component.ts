@@ -89,6 +89,8 @@ export class MovieCardComponent implements OnInit {
       const user = JSON.parse(localStorage.getItem('user') || '{}');
       user.favMovies.push(movieId);
       localStorage.setItem('user', JSON.stringify(user));
+           // test if working --> yes
+           console.log('Favorite Movies:', user.favMovies);
     });
   }
 
@@ -106,6 +108,8 @@ export class MovieCardComponent implements OnInit {
         user.favMovies.splice(index, 1); // 2nd parameter means remove one item only
       }
       localStorage.setItem('user', JSON.stringify(user));
+      // test if working  --> yes
+      console.log('Favorite Movies:', user.favMovies);
     });
   }
 

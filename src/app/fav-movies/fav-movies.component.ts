@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { fetchAPIdataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DirectorComponent } from '../director/director.component';
+import { DescriptionComponent } from '../description/description.component';
+import { GenreComponent } from '../genre/genre.component';
 
 
 @Component({
@@ -19,42 +22,100 @@ export class FavMoviesComponent implements OnInit {
     public snackBar: MatSnackBar,
   ) {}
 
-  getFavMovies(): void {
-    this.fetchApiData.getOneUser().subscribe((user: any) => {
-      this.user = user;
-      this.fetchApiData.getAllMovies().subscribe((movies: any) => {
-        this.favMovies = movies.filter((m: any) => user.FavMovies.includes(m._id))
-      });
-    });
-  }
   ngOnInit(): void {
-    this.getFavMovies();
+    this.getFavoriteMovies();
     // console.log(this.favMovies)
   }
 
-// first check if movie is in fav list 
-isFavMovie(id: string): boolean {
-  return this.user.FavMovies.includes(id);
-}
-//adding movie to fav moviese array addFavMovie()
+  getFavoriteMovies(): void {
+    this.fetchApiData.getFavMovies().subscribe(
+      (favoriteMovies: any) => {
+        this.favMovies = favoriteMovies;    //
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+  
 
-addFavMovie(id: string): void {  //why can not find name 'addFavMovie' ??
-  this.fetchApiData.addFavMovie(id).subscribe((result: any) => {  //specified type of result
+// analog mivieCARD !!
+
+isFavorite(movieId: string): boolean {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  return user.favMovies.includes(movieId);
+}
+
+addFavorite(movieId: string): void {
+  this.fetchApiData.addFavMovie(movieId).subscribe((result: any) => {
     this.snackBar.open('Movie added to favorites', 'OK', {
       duration: 2000,
     });
-    this.getFavMovies();      //calling to update list ?
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    user.favMovies.push(movieId);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.getFavoriteMovies(); // Update the favorite movies list
   });
 }
 
-// Removes movie from fav movies list using fetchApiData.deleteFavMovie
-
-deleteFavMovie(id: string): void {
-  this.fetchApiData.deleteFavMovie(id).subscribe((result: any) => {     //can not find 'movieId' but neihter 'movies._id/
+deleteFavorite(movieId: string): void {
+  this.fetchApiData.deleteFavMovie(movieId).subscribe((result) => {
     this.snackBar.open('Movie removed from favorites', 'OK', {
       duration: 2000,
     });
-    this.getFavMovies();
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const index = user.favMovies.indexOf(movieId);
+    if (index > -1) {
+      user.favMovies.splice(index, 1);
+    }
+    localStorage.setItem('user', JSON.stringify(user));
+    this.getFavoriteMovies(); // Update the favorite movies list
+  });
+}
+
+toggleFavorite(movie: any): void {
+  if (this.isFavorite(movie._id)) {
+    this.deleteFavorite(movie._id);
+  } else {
+    this.addFavorite(movie._id);
+  }
+}
+
+// also have to add all the other funcs for the movie details components
+openGenre(name: string, description: string): void {
+  this.dialog.open(GenreComponent, {
+    data: {
+      name: name,
+      description: description,
+    },
+    width: '400px',
+  });
+}
+
+openDirector(
+  name: string,
+  birthyear: string,
+  gender: string,
+  bio: string
+): void {
+  this.dialog.open(DirectorComponent, {
+    data: {
+      name: name,
+      birthyear: birthyear,
+      gender: gender,
+      bio: bio,
+    },
+    width: '400px',
+  });
+}
+
+openDescription(title: string, description: string): void {
+  this.dialog.open(DescriptionComponent, {
+    data: {
+      title: title,
+      description: description,
+    },
+    width: '400px',
   });
 }
 }

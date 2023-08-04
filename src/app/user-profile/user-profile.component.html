@@ -48,8 +48,17 @@
             />
           </mat-form-field>
         </form>
-        <!-- Display the list of favorite movies -->
- 
+        <!-- Display a list of favorite movies
+        <div *ngIf="favorites.length > 0">
+          <h3>Favorite Movies:</h3>
+          <ul>
+            <li *ngFor="let movie of favorites">{{ movie.title }}</li>
+          </ul>
+        </div>
+        <div *ngIf="favorites.length === 0">
+          <p>No favorite movies found.</p>
+        </div> -->
+
       </mat-card-content>
       <mat-card-actions class="user-profile-actions">
         <button mat-raised-button (click)="editUserData()" color="basic">
@@ -62,4 +71,6 @@
         </button>
       </mat-card-actions>
     </mat-card>
+    <!-- now displaying the favMoviesComponent with the selector: -->
+    <app-fav-movies></app-fav-movies>
   </div>
