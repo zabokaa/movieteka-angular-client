@@ -2,16 +2,16 @@
 <mat-card>
 
     <mat-card-header>
-        <mat-card-title>sign up !</mat-card-title>
+        <mat-card-title>sign up ! <br><br> * required data</mat-card-title>
     </mat-card-header>
-
+    <br>
     <mat-card-content>
         <form>
             <mat-form-field>
                 <input
                 matInput
                 [(ngModel)]="userData.username"
-                placeholder="your username"
+                placeholder="your username *"
                 type="text"
                 name="username"
                 required
@@ -22,7 +22,7 @@
                 <input
                 matInput
                 [(ngModel)]="userData.password"
-                placeholder="password"
+                placeholder="password *"
                 type="password"
                 name="password"
                 required
@@ -34,7 +34,7 @@
                 matInput
                 [(ngModel)]="userData.email"
                 type="email"
-                placeholder="your email"
+                placeholder="your email *"
                 name="email"
                 required
                 >
@@ -44,7 +44,7 @@
                 <input 
                 matInput
                 [(ngModel)]="userData.bday"
-                placeholder="your birthday - if you want to share"
+                placeholder="optional"
                 name="bday"
                 type="date"
                 >

@@ -24,9 +24,16 @@ import { DescriptionComponent } from './description/description.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 const appRoutes: Routes = [
-  { path: 'welcome', component: WelcomePageComponent },
+  { path: 'movies/welcome', component: WelcomePageComponent },
+  { path: 'welcome', component: WelcomePageComponent},
+  { path: 'movies/profile/welcome', component: WelcomePageComponent},
+  { path: 'movies/profile/movies/welcome', component: WelcomePageComponent},
   { path: 'movies', component: MovieCardComponent },
-  { path: 'movies/profile', component: UserProfileComponent },     //since I route to profile from movies ?
+  { path: 'movies/profile/movies/profile', component: UserProfileComponent },  
+  { path: 'movies/profile', component: UserProfileComponent },  
+  { path: 'movies/profile/movies', component: MovieCardComponent }, 
+  { path: 'movies/profile/movies/profile/welcome', component: WelcomePageComponent},
+    //since I route to profile from movies ?
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 

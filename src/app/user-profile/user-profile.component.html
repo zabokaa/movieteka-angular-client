@@ -1,4 +1,9 @@
 <div >
+  <mat-toolbar color="primary" >    
+    YOUR MOVIETEKA
+      <a routerLink="movies" mat-stroked-button style="color: purple;">..see all movies</a>
+      <a routerLink="welcome" mat-stroked-button>Logout</a>
+</mat-toolbar>
     <mat-card>
       <mat-card-header >
         <mat-card-title style="margin: 0 0 1.15em;"><h2>Hello {{ user.username }} !</h2></mat-card-title>
@@ -48,7 +53,6 @@
             />
           </mat-form-field>
         </form>
-
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button (click)="editUserData()" color="basic" class="left-btn">
