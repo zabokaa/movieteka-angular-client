@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 import { fetchAPIdataService} from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -23,25 +22,24 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     public fetchApiData: fetchAPIdataService,
-    //public dialogRef: MatDialogRef<UserProfileComponent>, // not needed !!
     public snackBar: MatSnackBar,
     private router: Router
   ) {}
 
-ngOnInit(): void {    //problem: ngOnit was outside of the class def
+ngOnInit(): void {    
   this.getUserData();
 }
 
-// Fetch user data via API  .. ahh, oc 2 different funcs can not have the exact same naming
+// Fetch user and favMovies via all movies 
 getUserData(): void {                             // no need for subscribe !!
   this.user =  this.fetchApiData.getOneUser();
   this.updatedUser.username = this.user.username;
   this.updatedUser.email = this.user.email;
   this.updatedUser.bday = this.user.bday;
-
+  
   this.fetchApiData.getAllMovies().subscribe((response: any) => {
     this.favorites = response.filter((m: {_id:any}) => this.user.favMovies.indexOf(m._id) >= 0)
-    console.log(this.favorites)     // working
+    // console.log(this.favorites)     
   })
 }
 
@@ -111,7 +109,6 @@ deleteFavorite(movieId: string): void {
     const index = user.favMovies.indexOf(movieId);
     console.log(index);
     if (index > -1) {
-      // only splice array when item is found
       user.favMovies.splice(index, 1); // 2nd parameter means remove one item only
     }
     localStorage.setItem('user', JSON.stringify(user));
