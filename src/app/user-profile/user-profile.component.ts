@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class UserProfileComponent implements OnInit {
   user: any = {};
   initialInput: any = {};
-  favorites: any = [];   //that is the array of fav movies
+  favorites: any = [];   //that is the array of fav movies, also use in favMovieComp
    // update user data
    @Input() updatedUser = {
     username: '',
@@ -30,8 +30,6 @@ export class UserProfileComponent implements OnInit {
 
 ngOnInit(): void {    //problem: ngOnit was outside of the class def
   this.getUserData();
-  // this.getFavorites();
-  // console.log(this.ngOnInit);   --> oki, both funcs have been called
 }
 
 // Fetch user data via API  .. ahh, oc 2 different funcs can not have the exact same naming
@@ -40,8 +38,11 @@ getUserData(): void {                             // no need for subscribe !!
   this.updatedUser.username = this.user.username;
   this.updatedUser.email = this.user.email;
   this.updatedUser.bday = this.user.bday;
-  this.favorites = this.user.FavMovies;
-    return this.user;
+
+  this.fetchApiData.getAllMovies().subscribe((response: any) => {
+    this.favorites = response.filter((m: {_id:any}) => this.user.favMovies.indexOf(m._id) >= 0)
+    console.log(this.favorites)     // working
+  })
 }
 
 // Update user data, such as username, password, email, or birthday
@@ -80,13 +81,54 @@ deleteUserData(): void {
     });
   }
 }
+////
+// Check if the movie is in the user's favorite list
+isFavorite(movie: any): boolean {
+  return this.fetchApiData.isFavMovie(movie._id);
+}
 
-// // getting array of favorite movies of the user
-// getFavorites(): void {
-//   this.fetchApiData.getFavMovies().subscribe((resp: any) => {
-//     this.favorites = resp;       // here updating fav array with fetched data
-//     console.log(this.favorites);  // not showing 
-//   });
-// }
+// Add favorite movie
+addFavorite(movieId: string): void {
+  this.fetchApiData.addFavMovie(movieId).subscribe((Response: any) => {
+    this.snackBar.open('added to favorites', 'OK', {
+      duration: 2000,
+    });
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    user.favMovies.push(movieId);
+    localStorage.setItem('user', JSON.stringify(user));
+         // test if working --> yes
+         console.log('Favorite Movies:', user.favMovies);
+  });
+}
+
+// Delete favorite movie
+deleteFavorite(movieId: string): void {
+  this.fetchApiData.deleteFavMovie(movieId).subscribe((result) => {
+    this.snackBar.open('Movie removed from favorites', 'OK', {
+      duration: 2000,
+    });
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const index = user.favMovies.indexOf(movieId);
+    console.log(index);
+    if (index > -1) {
+      // only splice array when item is found
+      user.favMovies.splice(index, 1); // 2nd parameter means remove one item only
+    }
+    localStorage.setItem('user', JSON.stringify(user));
+    // test if working  --> yes
+    console.log('Favorite Movies:', user.favMovies);
+  });
+}
+
+// Add or remove the movie from the user's favorite list
+toggleFavorite(movie: any): void {
+  if (this.isFavorite(movie)) {
+    this.deleteFavorite(movie._id);
+    // Remove from favorites
+  } else {
+    // Add to favorites
+    this.addFavorite(movie._id);
+  }
+}
 
 }
