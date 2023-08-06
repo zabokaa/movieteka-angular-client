@@ -3,6 +3,9 @@ import { fetchAPIdataService} from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
+/**
+ * Component representing the user profile page.
+ */
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -12,7 +15,9 @@ export class UserProfileComponent implements OnInit {
   user: any = {};
   initialInput: any = {};
   favorites: any = [];   //that is the array of fav movies, also use in favMovieComp
-   // update user data
+   /**
+   * Input property to store the updated user data.
+   */
    @Input() updatedUser = {
     username: '',
     password: '',
@@ -30,7 +35,9 @@ ngOnInit(): void {
   this.getUserData();
 }
 
-// Fetch user and favMovies via all movies 
+/**
+   * Fetch user data and favorite movies via API getOneUser().
+   */
 getUserData(): void {                             // no need for subscribe !!
   this.user =  this.fetchApiData.getOneUser();
   this.updatedUser.username = this.user.username;
@@ -43,7 +50,9 @@ getUserData(): void {                             // no need for subscribe !!
   })
 }
 
-// Update user data, such as username, password, email, or birthday
+/**
+* Update user data, such as username, password, email, or birthday via API editUser().
+*/
 editUserData(): void {
   this.fetchApiData.editUser(this.updatedUser).subscribe((result) => {
     console.log(result);
@@ -61,7 +70,9 @@ editUserData(): void {
   });
 }
 
-// Delete user data for the user that is logged in
+/**
+   * Delete user data for the user that is logged in via API deleteUser().
+   */
 deleteUserData(): void {
   if (confirm('your account will be completely deleted + all your data will be lost')) {
     this.router.navigate(['welcome']).then(() => {
@@ -79,13 +90,19 @@ deleteUserData(): void {
     });
   }
 }
-////
-// Check if the movie is in the user's favorite list
+/**
+   * Check if the movie is in the user's favorite list.
+   * @param movie The movie object to check.
+   * @returns True if the movie is a favorite, false otherwise.
+   */
 isFavorite(movie: any): boolean {
   return this.fetchApiData.isFavMovie(movie._id);
 }
 
-// Add favorite movie
+/**
+   * Add a movie to the user's favorite list via API call to addFavMovie().
+   * @param movieId The ID of the movie to add to favorites.
+   */
 addFavorite(movieId: string): void {
   this.fetchApiData.addFavMovie(movieId).subscribe((Response: any) => {
     this.snackBar.open('added to favorites', 'OK', {
@@ -99,7 +116,10 @@ addFavorite(movieId: string): void {
   });
 }
 
-// Delete favorite movie
+/**
+   * Delete a movie from the user's favorite list via API call to deleteFavMovie().
+   * @param movieId The ID of the movie to remove from favorites.
+   */
 deleteFavorite(movieId: string): void {
   this.fetchApiData.deleteFavMovie(movieId).subscribe((result) => {
     this.snackBar.open('Movie removed from favorites', 'OK', {
@@ -117,7 +137,10 @@ deleteFavorite(movieId: string): void {
   });
 }
 
-// Add or remove the movie from the user's favorite list
+/**
+   * Add or remove the movie from the user's favorite list
+   * @param movie The movie object to toggle in favorites.
+   */
 toggleFavorite(movie: any): void {
   if (this.isFavorite(movie)) {
     this.deleteFavorite(movie._id);
@@ -127,5 +150,4 @@ toggleFavorite(movie: any): void {
     this.addFavorite(movie._id);
   }
 }
-
 }
