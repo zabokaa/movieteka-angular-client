@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -22,20 +21,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DirectorComponent } from './director/director.component';
 import { DescriptionComponent } from './description/description.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 
-const appRoutes: Routes = [
-  { path: 'movies/welcome', component: WelcomePageComponent },
-  { path: 'welcome', component: WelcomePageComponent},
-  { path: 'movies/profile/welcome', component: WelcomePageComponent},
-  { path: 'movies/profile/movies/welcome', component: WelcomePageComponent},
-  { path: 'movies', component: MovieCardComponent },
-  { path: 'movies/profile/movies/profile', component: UserProfileComponent },  
-  { path: 'movies/profile', component: UserProfileComponent },  
-  { path: 'movies/profile/movies', component: MovieCardComponent }, 
-  { path: 'movies/profile/movies/profile/welcome', component: WelcomePageComponent},
-    //since I route to profile from movies ?
-  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
-];
+
 
 @NgModule({             
   declarations: [
@@ -47,7 +35,8 @@ const appRoutes: Routes = [
     GenreComponent,
     UserProfileComponent,
     DirectorComponent,
-    DescriptionComponent
+    DescriptionComponent,
+    NavigationBarComponent
   ],
   imports: [                //manually adding 
     BrowserModule,
@@ -62,7 +51,6 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatDialogModule,
     MatSnackBarModule,
-    RouterModule.forRoot(appRoutes),
     MatIconModule,
     MatToolbarModule,
   ],
