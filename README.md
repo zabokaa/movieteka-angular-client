@@ -2,7 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
 
-🌟 deployed app: https://zabokaa.github.io/movieteka-angular-client/ 🎥 🍿
+🌟 deployed app: <a href="https://zabokaa.github.io/movieteka-angular-client/" target="_blank">Movieteka</a> 🎥 🍿
+
+
 
 ## Development server
 
